@@ -1,12 +1,10 @@
 .table__container {
   /* border: red 1px solid; */
-  width: 2000px;
+  width: 100%;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   background-color: black;
   padding-top: 12px;
-  padding-right: 78px;
-  padding-left: 50px;
   padding-bottom: 50px;
   justify-content: center;
   overflow: scroll
@@ -23,7 +21,7 @@
 .th {
   text-align: center;
   font-weight: bold;
-  color: yellow;
+  color: red;
 }
 
 .td {

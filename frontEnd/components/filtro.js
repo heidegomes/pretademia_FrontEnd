@@ -107,7 +107,7 @@ const Filtro = () => {
   const handleFilter = () => {  // Aplica o filtro apenas quando o botão é clicado
     const queryParamsObj = {};
     console.log("cliquei aqui")
-    if (filterTitulo) queryParamsObj.titulo = filterTitulo;
+    if (filterTitulo) queryParamsObj.projeto = filterTitulo;
     if (filterDiscente) queryParamsObj.discente = filterDiscente;
     if (filterOrientador) queryParamsObj.orientador = filterOrientador;
     if (palavraChave) queryParamsObj.palavra_chave = palavraChave;
@@ -115,7 +115,7 @@ const Filtro = () => {
     if (selectedGrauAcademico) queryParamsObj.grau_academico = grauAcademico;
     if (selectedYear) queryParamsObj.ano = selectedYear;
     if (selectedRegiao) queryParamsObj.regiao = selectedRegiao;
-    if (selectedUF) queryParamsObj.uf = selectedUF;
+    if (selectedUF) queryParamsObj.uf_ies = selectedUF;
     if (selectedEntidadeEnsino) queryParamsObj.entidade_ensino = selectedEntidadeEnsino;
     if (selectedPrograma) queryParamsObj.programa = selectedPrograma;
     if (selectedGrandeAreaConhecimento) queryParamsObj.grande_area_conhecimento = selectedGrandeAreaConhecimento;
@@ -133,36 +133,43 @@ const Filtro = () => {
   };
 
   return (
-    <div className={styles.filtro_container}>
+    <div className={styles.filtro__container}>
       <form>
-        <div>
-          <label htmlFor="titulo">Título do projeto:
-            <input type="text" name="titulo" id="titulo" value={filterTitulo} onChange={(e) => setFilterTitulo(e.target.value)} />
-          </label>
+        <div className={styles.searchText__container}>
+          <div className={styles.searchText}>
+            <div>
+              <label htmlFor="titulo">Título do projeto:
+                <input type="text" name="titulo" id="titulo" value={filterTitulo} onChange={(e) => setFilterTitulo(e.target.value)} />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="discente">Discente:
+                <input type="text" name="discente" id="discente" value={filterDiscente} onChange={(e) => setFilterDiscente(e.target.value)} />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="orientador">Orientador:
+                <input type="text" name="orientador" id="orientador" value={filterOrientador} onChange={(e) => setFilterOrientador(e.target.value)} />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="palavra_chave">Palavra-chave:
+                <input type="text" name="palavra_chave" id="palavra_chave" value={palavraChave} onChange={(e) => setPalavraChave(e.target.value)} />
+              </label>
+            </div>
+            <div>
+              <label htmlFor="linha_pesquisa">Linha de pesquisa:
+                <input type="text" name="linha_pesquisa" id="linha_pesquisa" value={linhaPesquisa} onChange={(e) => setLinhaPesquisa(e.target.value)} />
+              </label>
+            </div>
+          </div>
         </div>
-        <div>
-          <label htmlFor="discente">Discente:
-            <input type="text" name="discente" id="discente" value={filterDiscente} onChange={(e) => setFilterDiscente(e.target.value)} />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="orientador">Orientador:
-            <input type="text" name="orientador" id="orientador" value={filterOrientador} onChange={(e) => setFilterOrientador(e.target.value)} />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="palavra_chave">Palavra-chave:
-            <input type="text" name="palavra_chave" id="palavra_chave" value={palavraChave} onChange={(e) => setPalavraChave(e.target.value)} />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="linha_pesquisa">Linha de pesquisa:
-            <input type="text" name="linha_pesquisa" id="linha_pesquisa" value={linhaPesquisa} onChange={(e) => setLinhaPesquisa(e.target.value)} />
-          </label>
-        </div>
-        <div>
+
+        <div className={styles.options}>
+          <div>
           <label htmlFor="grau_academido">Grau acadêmico:
             <select
+                className={styles.selected}
               name="grau_academico"
               id="grau_academico"
               onChange={(e) => setSelectedGrauAcademico(e.target.value)}
@@ -178,6 +185,7 @@ const Filtro = () => {
         <div>
           <label htmlFor="ano">Ano:
             <select
+                className={styles.selected}
               name="ano"
               id="ano"
               onChange={(e) => setSelectedYear(e.target.value)}
@@ -193,6 +201,7 @@ const Filtro = () => {
         <div>
           <label htmlFor="regiao">Região:
             <select
+                className={styles.selected}
               name="regiao"
               id="regiao"
               onChange={(e) => setSelectedRegiao(e.target.value)}
@@ -208,6 +217,7 @@ const Filtro = () => {
         <div>
           <label htmlFor="uf">UF:
             <select
+                className={styles.selected}
               name="uf"
               id="uf"
               onChange={(e) => setSelectedUF(e.target.value)}
@@ -223,6 +233,7 @@ const Filtro = () => {
         <div>
           <label htmlFor="entidade_ensino">Entidade de Ensino:
             <select
+                className={styles.selected}
               name="entidade_ensino"
               id="entidade_ensino"
               onChange={(e) => setSelectedEntidadeEnsino(e.target.value)}
@@ -238,6 +249,7 @@ const Filtro = () => {
         <div>
           <label htmlFor="programa">Programa:
             <select
+                className={styles.selected}
               name="programa"
               id="programa"
               onChange={(e) => setSelectedPrograma(e.target.value)}
@@ -253,6 +265,7 @@ const Filtro = () => {
         <div>
           <label htmlFor="grande_area_conhecimento">Grande Área de Conhecimento:
             <select
+                className={styles.selected}
               name="grande_area_conhecimento"
               id="grande_area_conhecimento"
               onChange={(e) => setSelectedGrandeAreaConhecimento(e.target.value)}
@@ -268,6 +281,7 @@ const Filtro = () => {
         <div>
           <label htmlFor="area_conhecimento">Área de Conhecimento:
             <select
+                className={styles.selected}
               name="area_conhecimento"
               id="area_conhecimento"
               onChange={(e) => setSelectedAreaConhecimento(e.target.value)}
@@ -283,6 +297,7 @@ const Filtro = () => {
         <div>
           <label htmlFor="area_avaliacao">Área de Avaliação:
             <select
+                className={styles.selected}
               name="area_avaliacao"
               id="area_avaliacao"
               onChange={(e) => setSelectedAreaAvaliacao(e.target.value)}
@@ -295,8 +310,9 @@ const Filtro = () => {
             </select>
           </label>
         </div>
-        <div>
-          <button type="button" onClick={handleFilter}>
+        </div>
+        <div className={styles.options_button}>
+          <button className={styles.button} type="button" onClick={handleFilter}>
             Filtrar
           </button>
         </div>
