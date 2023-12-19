@@ -15,7 +15,6 @@ const Table = () => {
             <th>Região</th>
             <th>UF</th>
             <th>Entidade de Ensino</th>
-            <th>Disponível para Download</th>
             <th>Programa</th>
             <th>Grande Area de Conhecimento</th>
             <th>Area de Conhecimento</th>
@@ -27,7 +26,6 @@ const Table = () => {
             {/* <th>Resumo</th> */}
             <th>Linha de pesquisa</th>
             <th>Orientador</th>
-            <th>Hyperlink</th>
           </tr>
         </thead>
         <tbody>
@@ -37,7 +35,6 @@ const Table = () => {
               <td>{item.regiao}</td>
               <td>{item.uf_ies}</td>
               <td>{item.entidade_ensino}</td>
-              <td>{item.disponivel_dowload}</td>
               <td>{item.programa}</td>
               <td>{item.grande_area_conhecimento}</td>
               <td>{item.area_conhecimento}</td>
@@ -49,7 +46,6 @@ const Table = () => {
               {/* <td>{item.resumo}</td> */}
               <td>{item.linha_pesquisa}</td>
               <td>{item.orientador}</td>
-              <td>{item.hyperlink}</td>
             </tr>
           ))}
         </tbody>

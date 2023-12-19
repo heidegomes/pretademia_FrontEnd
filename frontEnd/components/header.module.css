@@ -1,0 +1,17 @@
+.container__header {
+  background-color: #5c0065;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #f6c405;
+  display: flex;
+  justify-content: flex-end;
+  height: 80px;
+  padding-right: 200px;
+}
+
+.link {
+  color: #f6c405;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 20px 50px;
+}

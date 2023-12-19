@@ -4,7 +4,7 @@ import styles from './filtro.module.css';
 import { useRouter } from 'next/navigation';
 import PretademiaContext from '../context/pretademiaContext';
 import { years, regions, uf, grauAcademico } from '../services/dataFilters';
-
+import iconeRoxo from '../images/iconeRoxo.png';
 
 const Filtro = () => {
   const router = useRouter();
@@ -134,54 +134,41 @@ const Filtro = () => {
 
   return (
     <div className={styles.filtro__container}>
+      <div className={styles.logo__container}>
+        <img src={iconeRoxo} alt="pretademia" className={styles.logo} />
+      </div>
       <form>
-        <div className={styles.searchText__container}>
-          <div className={styles.searchText}>
-            <div>
-              <label htmlFor="titulo">Título do projeto:
-                <input type="text" name="titulo" id="titulo" value={filterTitulo} onChange={(e) => setFilterTitulo(e.target.value)} />
-              </label>
-            </div>
-            <div>
-              <label htmlFor="discente">Discente:
-                <input type="text" name="discente" id="discente" value={filterDiscente} onChange={(e) => setFilterDiscente(e.target.value)} />
-              </label>
-            </div>
-            <div>
-              <label htmlFor="orientador">Orientador:
-                <input type="text" name="orientador" id="orientador" value={filterOrientador} onChange={(e) => setFilterOrientador(e.target.value)} />
-              </label>
-            </div>
-            <div>
-              <label htmlFor="palavra_chave">Palavra-chave:
-                <input type="text" name="palavra_chave" id="palavra_chave" value={palavraChave} onChange={(e) => setPalavraChave(e.target.value)} />
-              </label>
-            </div>
-            <div>
-              <label htmlFor="linha_pesquisa">Linha de pesquisa:
-                <input type="text" name="linha_pesquisa" id="linha_pesquisa" value={linhaPesquisa} onChange={(e) => setLinhaPesquisa(e.target.value)} />
-              </label>
-            </div>
+        <div className={styles.searchText}>
+          <div>
+            <label htmlFor="titulo">Título do projeto:
+              <input type="text" name="titulo" id="titulo" value={filterTitulo} onChange={(e) => setFilterTitulo(e.target.value)} />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="discente">Discente:
+              <input type="text" name="discente" id="discente" value={filterDiscente} onChange={(e) => setFilterDiscente(e.target.value)} />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="orientador">Orientador:
+              <input type="text" name="orientador" id="orientador" value={filterOrientador} onChange={(e) => setFilterOrientador(e.target.value)} />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="palavra_chave">Palavra-chave:
+              <input type="text" name="palavra_chave" id="palavra_chave" value={palavraChave} onChange={(e) => setPalavraChave(e.target.value)} />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="linha_pesquisa">Linha de pesquisa:
+              <input type="text" name="linha_pesquisa" id="linha_pesquisa" value={linhaPesquisa} onChange={(e) => setLinhaPesquisa(e.target.value)} />
+            </label>
           </div>
         </div>
 
+
         <div className={styles.options}>
-          <div>
-          <label htmlFor="grau_academido">Grau acadêmico:
-            <select
-                className={styles.selected}
-              name="grau_academico"
-              id="grau_academico"
-              onChange={(e) => setSelectedGrauAcademico(e.target.value)}
-            >
-              {grauAcademico.map((e) => (
-                <option value={e} name={e} key={e}>
-                  {e}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
+
         <div>
           <label htmlFor="ano">Ano:
             <select
@@ -246,6 +233,22 @@ const Filtro = () => {
             </select>
           </label>
         </div>
+          <div>
+            <label htmlFor="grau_academido">Grau acadêmico:
+              <select
+                className={styles.selected}
+                name="grau_academico"
+                id="grau_academico"
+                onChange={(e) => setSelectedGrauAcademico(e.target.value)}
+              >
+                {grauAcademico.map((e) => (
+                  <option value={e} name={e} key={e}>
+                    {e}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
         <div>
           <label htmlFor="programa">Programa:
             <select

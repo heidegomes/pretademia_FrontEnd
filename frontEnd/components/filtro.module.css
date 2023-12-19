@@ -1,5 +1,5 @@
 .filtro__container {
-  color: white;
+  color: #f6c405;
   font-family: Arial, Helvetica, sans-serif;
   background-color: black;
   width: 100%;
@@ -12,13 +12,14 @@
 .searchText {
   /* border: green 1px solid; */
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   font-size: 15px;
+  padding-top: 20px;
   padding-bottom: 20px;
 }
 
 .searchText input {
-  border: rgb(169, 169, 169) 1px solid;
+  border: #f6c405 1px solid;
   background-color: black;
   color: white;
   width: 155px;
@@ -45,24 +46,25 @@
   justify-content: space-around;
   width: 100%;
   font-size: 15px;
-  color: rgb(169, 169, 169);
+  color: #f6c405;
+    ;
+    height: 100px;
 }
 
 .options_input {
   /* border: rgb(169, 169, 169) 1px solid; */
-  color: white;
+  color: #f5e9cb;
   border-radius: 5px;
   background-color: black;
   width: 80px;
   height: 26px;
-
 }
 
 /* input select */
 .selected {
   background-color: black;
-  color: white;
-  border-color: transparent transparent #fff transparent;
+  color: #f5e9cb;
+    border-color: transparent transparent #f6c405 transparent;
   width: 130px;
 }
 
@@ -76,16 +78,26 @@
 }
 
 .button {
-  color: yellow;
-  background-color: black;
-  border: yellow 1px solid;
+  color: #f6c405;
+    background-color: #5c0065;
+    border: #5c0065 1px solid;
   width: 80px;
-  height: 80px;
-  padding: 8px;
+  height: 38px;
+    padding: 10px;
   border-radius: 5px;
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   font-size: 15px;
   font-weight: bold
+}
+.logo {
+  height: 400px;
+}
+
+.logo__container {
+  border: green 1px solid;
+  display: flex;
+  justify-content: center;
+  border: none;
 }
