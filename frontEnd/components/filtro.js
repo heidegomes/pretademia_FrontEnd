@@ -1,10 +1,11 @@
 // Client component
 import { useContext, useEffect, useState } from 'react';
+import Image from 'next/image'
 import styles from './filtro.module.css';
 import { useRouter } from 'next/navigation';
 import PretademiaContext from '../context/pretademiaContext';
 import { years, regions, uf, grauAcademico } from '../services/dataFilters';
-import iconeRoxo from '../images/iconeRoxo.png';
+import iconeRoxo from '../public/iconeRoxo.png';
 
 const Filtro = () => {
   const router = useRouter();
@@ -135,7 +136,7 @@ const Filtro = () => {
   return (
     <div className={styles.filtro__container}>
       <div className={styles.logo__container}>
-        <img src={iconeRoxo} alt="pretademia" className={styles.logo} />
+        <Image src={iconeRoxo} alt="pretademia" className={styles.logo} />
       </div>
       <form>
         <div className={styles.searchText}>

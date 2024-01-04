@@ -21,7 +21,7 @@
 .searchText input {
   border: #f6c405 1px solid;
   background-color: black;
-  color: white;
+  color: #f5e9cb;
   width: 155px;
   height: 20px;
   border-radius: 5px;
@@ -92,7 +92,8 @@
   font-weight: bold
 }
 .logo {
-  height: 400px;
+  height: 200px;
+    width: 200px;
 }
 
 .logo__container {
