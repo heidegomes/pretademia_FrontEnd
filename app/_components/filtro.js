@@ -1,11 +1,12 @@
-// Client component
+'use client';
+
 import { useContext, useEffect, useState } from 'react';
 import Image from 'next/image'
 import styles from './filtro.module.css';
 import { useRouter } from 'next/navigation';
-import PretademiaContext from '../context/pretademiaContext';
-import { years, regions, uf, grauAcademico } from '../services/dataFilters';
-import iconeRoxo from '../public/iconeRoxo.png';
+import PretademiaContext from '../../context/pretademiaContext';
+import { years, regions, uf, grauAcademico } from '../../services/dataFilters';
+import iconeRoxo from '../../public/iconeRoxo.png';
 
 const Filtro = () => {
   const router = useRouter();
@@ -107,7 +108,7 @@ const Filtro = () => {
 
   const handleFilter = () => {  // Aplica o filtro apenas quando o botão é clicado
     const queryParamsObj = {};
-    console.log("cliquei aqui")
+
     if (filterTitulo) queryParamsObj.projeto = filterTitulo;
     if (filterDiscente) queryParamsObj.discente = filterDiscente;
     if (filterOrientador) queryParamsObj.orientador = filterOrientador;

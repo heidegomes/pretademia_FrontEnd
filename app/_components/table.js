@@ -1,6 +1,6 @@
 import styles from './table.module.css';
 import { useContext } from 'react';
-import PretademiaContext from '../context/pretademiaContext';
+import PretademiaContext from '../../context/pretademiaContext';
 
 const Table = () => {
   const { filteredData, setFilteredData } = useContext(PretademiaContext);

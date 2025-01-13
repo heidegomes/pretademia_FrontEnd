@@ -1,7 +1,9 @@
+'use client';
+
 import React from 'react';
-import Filtro from '../components/filtro';
-import Table from '../components/table';
-import Header from '../components/header';
+import Filtro from './_components/filtro';
+import Table from './_components/table';
+import Header from './_components/header';
 
 // import PretademiaProvider from '../context/pretademiaProvider';
 
