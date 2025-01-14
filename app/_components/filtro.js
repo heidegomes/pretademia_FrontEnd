@@ -138,12 +138,13 @@ const Filtro = () => {
   };
 
   return (
-    <div className='bg-yellow-400'>
+    <div className=''>
       <div className='flex justify-center w-full bg-black'>
         <Image src={iconeRoxo} alt="pretademia" className='flex justify-center h-52 w-52 m-8' />
       </div>
-      <form className='flex flex-col container mx-auto gap-4 text-purple-950 m-8'>
-        <div className='flex flex-row gap-4 justify-center'>
+      <div className="container mx-auto p-4">
+      <form className='flex flex-col gap-4 text-purple-950 bg-yellow-400 border rounded-lg shadow-md border-gray-200'>
+        <div className='flex flex-row gap-4 justify-center mt-6'>
           <div>
             <Label htmlFor="titulo">Título do projeto:
               <Input type="text" name="titulo" id="titulo" value={filterTitulo} onChange={(e) => setFilterTitulo(e.target.value)} />
@@ -357,7 +358,7 @@ const Filtro = () => {
           </div>
         </div>
 
-        <div className='flex flex-row gap-4 justify-between mb-4'>
+          <div className='flex flex-row gap-4 justify-between mb-6 mx-28 mt-2'>
           <Button type="button" size='lg' className='text-yellow-400 bg-purple-950'>
             Limpar filtros
           </Button>
@@ -366,6 +367,7 @@ const Filtro = () => {
           </Button>
         </div>
       </form>
+      </div>
     </div>
   );
 };

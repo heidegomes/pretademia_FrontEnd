@@ -2,53 +2,75 @@ import { useContext } from 'react';
 import PretademiaContext from '../../context/pretademiaContext';
 
 const Table = () => {
-  const { filteredData, setFilteredData } = useContext(PretademiaContext);
+  const { filteredData } = useContext(PretademiaContext);
+
+  console.log(filteredData);
 
   return (
+    <div className="container mx-auto p-4">
+      <div className="flex flex-col gap-4">
+        {filteredData.map((item, index) => (
+          <div
+            key={index}
+            className="bg-yellow-400 shadow-md rounded-lg p-6 border border-gray-200 w-full"
+          >
+            <div className="mb-4">
+              <h2 className="text-xl font-bold text-purple-950 mb-1">
+                Discente: {item.discente}
+              </h2>
+              <p className="text-sm text-purple-950">
+                <strong>Projeto:</strong> {item.projeto}
+              </p>
+            </div>
 
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Ano</th>
-            <th>Região</th>
-            <th>UF</th>
-            <th>Entidade de Ensino</th>
-            <th>Programa</th>
-            <th>Grande Area de Conhecimento</th>
-            <th>Area de Conhecimento</th>
-            <th>Area de avaliação</th>
-            <th>Discente</th>
-            <th>Projeto</th>
-            <th>Grau Acadêmico</th>
-            <th>Palavra chave</th>
-            {/* <th>Resumo</th> */}
-            <th>Linha de pesquisa</th>
-            <th>Orientador</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData.map((item) => (
-            <tr key={item.discente}>
-              <td>{item.ano}</td>
-              <td>{item.regiao}</td>
-              <td>{item.uf_ies}</td>
-              <td>{item.entidade_ensino}</td>
-              <td>{item.programa}</td>
-              <td>{item.grande_area_conhecimento}</td>
-              <td>{item.area_conhecimento}</td>
-              <td>{item.area_avaliacao}</td>
-              <td>{item.discente}</td>
-              <td>{item.projeto}</td>
-              <td>{item.grau_academico}</td>
-              <td>{item.palavra_chave}</td>
-              {/* <td>{item.resumo}</td> */}
-              <td>{item.linha_pesquisa}</td>
-              <td>{item.orientador}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <ul className="text-sm text-purple-950 space-y-1">
+                <li>
+                  <strong>Ano:</strong> {item.ano}
+                </li>
+                <li>
+                  <strong>Região:</strong> {item.regiao}
+                </li>
+                <li>
+                  <strong>UF:</strong> {item.uf_ies}
+                </li>
+                <li>
+                  <strong>Entidade de Ensino:</strong> {item.entidade_ensino}
+                </li>
+                <li>
+                  <strong>Programa:</strong> {item.programa}
+                </li>
+                <li>
+                  <strong>Grande Área de Conhecimento:</strong> {item.grande_area_conhecimento}
+                </li>
+                <li>
+                  <strong>Área de Conhecimento:</strong> {item.area_conhecimento}
+                </li>
+                <li>
+                  <strong>Área de Avaliação:</strong> {item.area_avaliacao}
+                </li>
+                <li>
+                  <strong>Grau Acadêmico:</strong> {item.grau_academico}
+                </li>
+                <li>
+                  <strong>Palavra-chave:</strong> {item.palavra_chave}
+                </li>
+                <li>
+                  <strong>Linha de Pesquisa:</strong> {item.linha_pesquisa}
+                </li>
+                <li>
+                  <strong>Orientador:</strong> {item.orientador}
+                </li>
+              </ul>
+              <div>
+                <p className="text-sm text-purple-950">
+                  <strong>Resumo:</strong> {item.resumo || 'N/A'}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
