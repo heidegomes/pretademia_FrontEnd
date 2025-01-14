@@ -1,11 +1,11 @@
-import styles from './header.module.css';
-const Header = () => {
+
+export default function Header() {
   return (
-    <div className={styles.container__header}>
-      <a className={styles.link}>Sobre nós</a>
-      <a className={styles.link}>Contato</a>
+    <div className="h-20 flex items-center text-purple-950 bg-yellow-400">
+      <div className="container mx-auto flex justify-end flex-row gap-4 m-8">
+        <a>Sobre nós</a>
+        <a>Contato</a>
+      </div>
     </div>
   );
 }
-
-export default Header;

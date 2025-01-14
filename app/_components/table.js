@@ -1,4 +1,3 @@
-import styles from './table.module.css';
 import { useContext } from 'react';
 import PretademiaContext from '../../context/pretademiaContext';
 
@@ -7,10 +6,10 @@ const Table = () => {
 
   return (
 
-    <div className={styles.table__container}>
-      <table className={styles.table}>
+    <div>
+      <table>
         <thead>
-          <tr className={styles.th}>
+          <tr>
             <th>Ano</th>
             <th>Região</th>
             <th>UF</th>
@@ -30,7 +29,7 @@ const Table = () => {
         </thead>
         <tbody>
           {filteredData.map((item) => (
-            <tr key={item.discente} className={styles.td}>
+            <tr key={item.discente}>
               <td>{item.ano}</td>
               <td>{item.regiao}</td>
               <td>{item.uf_ies}</td>

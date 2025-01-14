@@ -2,11 +2,14 @@
 
 import { useContext, useEffect, useState } from 'react';
 import Image from 'next/image'
-import styles from './filtro.module.css';
 import { useRouter } from 'next/navigation';
 import PretademiaContext from '../../context/pretademiaContext';
 import { years, regions, uf, grauAcademico } from '../../services/dataFilters';
 import iconeRoxo from '../../public/iconeRoxo.png';
+import { Input } from '@/components/ui/Input';
+import { Label } from '@/components/ui/Label';
+import { Select, SelectItem, SelectTrigger, SelectValue, SelectContent } from '@/components/ui/Select';
+import { Button } from '@/components/ui/Button';
 
 const Filtro = () => {
   const router = useRouter();
@@ -135,191 +138,232 @@ const Filtro = () => {
   };
 
   return (
-    <div className={styles.filtro__container}>
-      <div className={styles.logo__container}>
-        <Image src={iconeRoxo} alt="pretademia" className={styles.logo} />
+    <div className='bg-yellow-400'>
+      <div className='flex justify-center w-full bg-black'>
+        <Image src={iconeRoxo} alt="pretademia" className='flex justify-center h-52 w-52 m-8' />
       </div>
-      <form>
-        <div className={styles.searchText}>
+      <form className='flex flex-col container mx-auto gap-4 text-purple-950 m-8'>
+        <div className='flex flex-row gap-4 justify-center'>
           <div>
-            <label htmlFor="titulo">Título do projeto:
-              <input type="text" name="titulo" id="titulo" value={filterTitulo} onChange={(e) => setFilterTitulo(e.target.value)} />
-            </label>
+            <Label htmlFor="titulo">Título do projeto:
+              <Input type="text" name="titulo" id="titulo" value={filterTitulo} onChange={(e) => setFilterTitulo(e.target.value)} />
+            </Label>
           </div>
           <div>
-            <label htmlFor="discente">Discente:
-              <input type="text" name="discente" id="discente" value={filterDiscente} onChange={(e) => setFilterDiscente(e.target.value)} />
-            </label>
+            <Label htmlFor="discente">Discente:
+              <Input type="text" name="discente" id="discente" value={filterDiscente} onChange={(e) => setFilterDiscente(e.target.value)} />
+            </Label>
           </div>
           <div>
-            <label htmlFor="orientador">Orientador:
-              <input type="text" name="orientador" id="orientador" value={filterOrientador} onChange={(e) => setFilterOrientador(e.target.value)} />
-            </label>
+            <Label htmlFor="orientador">Orientador:
+              <Input type="text" name="orientador" id="orientador" value={filterOrientador} onChange={(e) => setFilterOrientador(e.target.value)} />
+            </Label>
           </div>
           <div>
-            <label htmlFor="palavra_chave">Palavra-chave:
-              <input type="text" name="palavra_chave" id="palavra_chave" value={palavraChave} onChange={(e) => setPalavraChave(e.target.value)} />
-            </label>
+            <Label htmlFor="palavra_chave">Palavra-chave:
+              <Input type="text" name="palavra_chave" id="palavra_chave" value={palavraChave} onChange={(e) => setPalavraChave(e.target.value)} />
+            </Label>
           </div>
           <div>
-            <label htmlFor="linha_pesquisa">Linha de pesquisa:
-              <input type="text" name="linha_pesquisa" id="linha_pesquisa" value={linhaPesquisa} onChange={(e) => setLinhaPesquisa(e.target.value)} />
-            </label>
+            <Label htmlFor="linha_pesquisa">Linha de pesquisa:
+              <Input type="text" name="linha_pesquisa" id="linha_pesquisa" value={linhaPesquisa} onChange={(e) => setLinhaPesquisa(e.target.value)} />
+            </Label>
           </div>
         </div>
 
-
-        <div className={styles.options}>
-
-        <div>
-          <label htmlFor="ano">Ano:
-            <select
-                className={styles.selected}
-              name="ano"
-              id="ano"
-              onChange={(e) => setSelectedYear(e.target.value)}
-            >
-              {years.map((e) => (
-                <option value={e} name={e} key={e}>
-                  {e}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-        <div>
-          <label htmlFor="regiao">Região:
-            <select
-                className={styles.selected}
-              name="regiao"
-              id="regiao"
-              onChange={(e) => setSelectedRegiao(e.target.value)}
-            >
-              {regions.map((r) => (
-                <option value={r} name={r} key={r}>
-                  {r}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-        <div>
-          <label htmlFor="uf">UF:
-            <select
-                className={styles.selected}
-              name="uf"
-              id="uf"
-              onChange={(e) => setSelectedUF(e.target.value)}
-            >
-              {uf.map((e) => (
-                <option value={e} name={e} key={e}>
-                  {e}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-        <div>
-          <label htmlFor="entidade_ensino">Entidade de Ensino:
-            <select
-                className={styles.selected}
-              name="entidade_ensino"
-              id="entidade_ensino"
-              onChange={(e) => setSelectedEntidadeEnsino(e.target.value)}
-            >
-              {entidadeEnsinoData.map((e) => (
-                <option value={e.entidade_ensino} name={e.entidade_ensino} key={e.entidade_ensino}>
-                  {e.entidade_ensino}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
+        <div className='flex flex-row gap-4 justify-center'>
           <div>
-            <label htmlFor="grau_academido">Grau acadêmico:
-              <select
-                className={styles.selected}
+            <Label htmlFor="ano">Ano:
+              <Select
+                name="ano"
+                id="ano"
+                onChange={(e) => setSelectedYear(e.target.value)}
+              >
+                <SelectTrigger className="w-[192px]">
+                  <SelectValue placeholder="Selecione" />
+                </SelectTrigger>
+                <SelectContent>
+                  {years.map((e) => (
+                    <SelectItem value={e} name={e} key={e}>
+                      {e}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </Label>
+          </div>
+          <div>
+            <Label htmlFor="regiao">Região:
+              <Select
+                name="regiao"
+                id="regiao"
+                onChange={(e) => setSelectedRegiao(e.target.value)}
+              >
+                <SelectTrigger className="w-[192px]">
+                    <SelectValue placeholder="Selecione" />
+                  </SelectTrigger>
+                <SelectContent>
+                  {regions.map((r) => (
+                    <SelectItem value={r} name={r} key={r}>
+                      {r}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </Label>
+          </div>
+          <div>
+            <Label htmlFor="uf">UF:
+              <Select
+                name="uf"
+                id="uf"
+                onChange={(e) => setSelectedUF(e.target.value)}
+              >
+                <SelectTrigger className="w-[192px]">
+                    <SelectValue placeholder="Selecione" />
+                  </SelectTrigger>
+                <SelectContent>
+                  {uf.map((e) => (
+                    <SelectItem value={e} name={e} key={e}>
+                      {e}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </Label>
+          </div>
+          <div>
+            <Label htmlFor="entidade_ensino">Entidade de Ensino:
+              <Select
+                name="entidade_ensino"
+                id="entidade_ensino"
+                onChange={(e) => setSelectedEntidadeEnsino(e.target.value)}
+              >
+                <SelectTrigger className="w-[192px]">
+                    <SelectValue placeholder="Selecione" />
+                  </SelectTrigger>
+                <SelectContent>
+                  {entidadeEnsinoData.map((e) => (
+                    <SelectItem value={e.entidade_ensino} name={e.entidade_ensino} key={e.entidade_ensino}>
+                      {e.entidade_ensino}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </Label>
+          </div>
+          <div>
+            <Label htmlFor="grau_academido">Grau acadêmico:
+              <Select
                 name="grau_academico"
                 id="grau_academico"
                 onChange={(e) => setSelectedGrauAcademico(e.target.value)}
               >
-                {grauAcademico.map((e) => (
-                  <option value={e} name={e} key={e}>
-                    {e}
-                  </option>
-                ))}
-              </select>
-            </label>
+                <SelectTrigger className="w-[192px]">
+                  <SelectValue placeholder="Selecione" />
+                </SelectTrigger>
+                <SelectContent>
+                  {grauAcademico.map((e) => (
+                    <SelectItem value={e} name={e} key={e}>
+                      {e}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </Label>
           </div>
-        <div>
-          <label htmlFor="programa">Programa:
-            <select
-                className={styles.selected}
-              name="programa"
-              id="programa"
-              onChange={(e) => setSelectedPrograma(e.target.value)}
-            >
-              {programaData.map((e) => (
-                <option value={e.programa} name={e.programa} key={e.programa}>
-                  {e.programa}
-                </option>
-              ))}
-            </select>
-          </label>
+
         </div>
-        <div>
-          <label htmlFor="grande_area_conhecimento">Grande Área de Conhecimento:
-            <select
-                className={styles.selected}
-              name="grande_area_conhecimento"
-              id="grande_area_conhecimento"
-              onChange={(e) => setSelectedGrandeAreaConhecimento(e.target.value)}
-            >
-              {grandeAreaConhecimentoData.map((e) => (
-                <option value={e.grande_area_conhecimento} name={e.grande_area_conhecimento} key={e.grande_area_conhecimento}>
-                  {e.grande_area_conhecimento}
-                </option>
-              ))}
-            </select>
-          </label>
+        <div className='flex flex-row gap-4 justify-center'>
+          <div>
+            <Label htmlFor="programa">Programa:
+              <Select
+                name="programa"
+                id="programa"
+                onChange={(e) => setSelectedPrograma(e.target.value)}
+              >
+                <SelectTrigger className="w-[192px]">
+                    <SelectValue placeholder="Selecione" />
+                  </SelectTrigger>
+                <SelectContent>
+                  {programaData.map((e) => (
+                    <SelectItem value={e.programa} name={e.programa} key={e.programa}>
+                      {e.programa}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </Label>
+          </div>
+          <div>
+            <Label htmlFor="grande_area_conhecimento">Grande Área de Conhecimento:
+              <Select
+                name="grande_area_conhecimento"
+                id="grande_area_conhecimento"
+                onChange={(e) => setSelectedGrandeAreaConhecimento(e.target.value)}
+              >
+                <SelectTrigger className="w-[192px]">
+                    <SelectValue placeholder="Selecione" />
+                  </SelectTrigger>
+                <SelectContent>
+                  {grandeAreaConhecimentoData.map((e) => (
+                    <SelectItem value={e.grande_area_conhecimento} name={e.grande_area_conhecimento} key={e.grande_area_conhecimento}>
+                      {e.grande_area_conhecimento}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </Label>
+          </div>
+          <div>
+            <Label htmlFor="area_conhecimento">Área de Conhecimento:
+              <Select
+                name="area_conhecimento"
+                id="area_conhecimento"
+                onChange={(e) => setSelectedAreaConhecimento(e.target.value)}
+              >
+                <SelectTrigger className="w-[192px]">
+                    <SelectValue placeholder="Selecione" />
+                  </SelectTrigger>
+                <SelectContent>
+                  {areaConhecimentoData.map((e) => (
+                    <SelectItem value={e.area_conhecimento} name={e.area_conhecimento} key={e.area_conhecimento}>
+                      {e.area_conhecimento}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </Label>
+          </div>
+          <div>
+            <Label htmlFor="area_avaliacao">Área de Avaliação:
+              <Select
+                name="area_avaliacao"
+                id="area_avaliacao"
+                onChange={(e) => setSelectedAreaAvaliacao(e.target.value)}
+              >
+                <SelectTrigger className="w-[192px]">
+                    <SelectValue placeholder="Selecione" />
+                  </SelectTrigger>
+                <SelectContent>
+                  {areaAvaliacaoData.map((e) => (
+                    <SelectItem value={e.area_avaliacao} name={e.area_avaliacao} key={e.area_avaliacao}>
+                      {e.area_avaliacao}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </Label>
+          </div>
         </div>
-        <div>
-          <label htmlFor="area_conhecimento">Área de Conhecimento:
-            <select
-                className={styles.selected}
-              name="area_conhecimento"
-              id="area_conhecimento"
-              onChange={(e) => setSelectedAreaConhecimento(e.target.value)}
-            >
-              {areaConhecimentoData.map((e) => (
-                <option value={e.area_conhecimento} name={e.area_conhecimento} key={e.area_conhecimento}>
-                  {e.area_conhecimento}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-        <div>
-          <label htmlFor="area_avaliacao">Área de Avaliação:
-            <select
-                className={styles.selected}
-              name="area_avaliacao"
-              id="area_avaliacao"
-              onChange={(e) => setSelectedAreaAvaliacao(e.target.value)}
-            >
-              {areaAvaliacaoData.map((e) => (
-                <option value={e.area_avaliacao} name={e.area_avaliacao} key={e.area_avaliacao}>
-                  {e.area_avaliacao}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-        </div>
-        <div className={styles.options_button}>
-          <button className={styles.button} type="button" onClick={handleFilter}>
+
+        <div className='flex flex-row gap-4 justify-between mb-4'>
+          <Button type="button" size='lg' className='text-yellow-400 bg-purple-950'>
+            Limpar filtros
+          </Button>
+          <Button type="button" size='lg' className='text-yellow-400 bg-purple-950' onClick={handleFilter}>
             Filtrar
-          </button>
+          </Button>
         </div>
       </form>
     </div>

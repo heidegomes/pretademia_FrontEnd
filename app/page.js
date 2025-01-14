@@ -5,18 +5,17 @@ import Filtro from './_components/filtro';
 import Table from './_components/table';
 import Header from './_components/header';
 
-// import PretademiaProvider from '../context/pretademiaProvider';
-
 const Home = () => {
   return (
-    <>
+    <main>
       <Header />
       <Filtro />
-      <Table /> 
-    </>
+      <Table />
+    </main>
   );
 };
 
 export default Home;
+
 
 
