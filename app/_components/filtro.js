@@ -2,7 +2,6 @@
 
 import { useContext, useEffect, useState } from 'react';
 import Image from 'next/image'
-import { useRouter } from 'next/navigation';
 import PretademiaContext from '../../context/pretademiaContext';
 import { years, regions, uf, grauAcademico } from '../../services/dataFilters';
 import iconeRoxo from '../../public/iconeRoxo.png';
@@ -12,7 +11,7 @@ import { Select, SelectItem, SelectTrigger, SelectValue, SelectContent } from '@
 import { Button } from '@/components/ui/Button';
 
 const Filtro = () => {
-  const router = useRouter();
+
   const [filterTitulo, setFilterTitulo] = useState('');
   const [filterDiscente, setFilterDiscente] = useState('');
   const [filterOrientador, setFilterOrientador] = useState('');
@@ -32,24 +31,8 @@ const Filtro = () => {
   const [selectedAreaConhecimento, setSelectedAreaConhecimento] = useState('');
   const [areaAvaliacaoData, setAreaAvaliacaoData] = useState([]);
   const [selectedAreaAvaliacao, setSelectedAreaAvaliacao] = useState('');
-  const [queryParams, setQueryParams] = useState('');
 
-  // Shared data
   const { filteredData, setFilteredData } = useContext(PretademiaContext);
-
-  useEffect(() => {
-    const fetchFilteredData = async () => {
-      try {
-        const response = await fetch(`http://localhost:3001/projects?${queryParams}`);
-        const data = await response.json();
-        setFilteredData(data);
-        console.log(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchFilteredData();
-  }, [queryParams]);
 
   useEffect(() => {
     const fetchEntidadeEnsino = async () => {
@@ -109,41 +92,81 @@ const Filtro = () => {
 
   }, []);
 
-  const handleFilter = () => {  // Aplica o filtro apenas quando o botão é clicado
+  const buildQuery = () => {
     const queryParamsObj = {};
 
-    if (filterTitulo) queryParamsObj.projeto = filterTitulo;
-    if (filterDiscente) queryParamsObj.discente = filterDiscente;
-    if (filterOrientador) queryParamsObj.orientador = filterOrientador;
-    if (palavraChave) queryParamsObj.palavra_chave = palavraChave;
-    if (linhaPesquisa) queryParamsObj.linha_pesquisa = linhaPesquisa;
-    if (selectedGrauAcademico) queryParamsObj.grau_academico = grauAcademico;
-    if (selectedYear) queryParamsObj.ano = selectedYear;
-    if (selectedRegiao) queryParamsObj.regiao = selectedRegiao;
-    if (selectedUF) queryParamsObj.uf_ies = selectedUF;
-    if (selectedEntidadeEnsino) queryParamsObj.entidade_ensino = selectedEntidadeEnsino;
-    if (selectedPrograma) queryParamsObj.programa = selectedPrograma;
-    if (selectedGrandeAreaConhecimento) queryParamsObj.grande_area_conhecimento = selectedGrandeAreaConhecimento;
-    if (selectedAreaConhecimento) queryParamsObj.area_conhecimento = selectedAreaConhecimento;
-    if (selectedAreaAvaliacao) queryParamsObj.area_avaliacao = selectedAreaAvaliacao;
+    if (filterTitulo) queryParamsObj.projeto = String(filterTitulo);
+    if (filterDiscente) queryParamsObj.discente = String(filterDiscente);
+    if (filterOrientador) queryParamsObj.orientador = String(filterOrientador);
+    if (palavraChave) queryParamsObj.palavra_chave = String(palavraChave);
+    if (linhaPesquisa) queryParamsObj.linha_pesquisa = String(linhaPesquisa);
+    if (selectedGrauAcademico) queryParamsObj.grau_academico = String(selectedGrauAcademico);
+    if (selectedYear) queryParamsObj.ano = String(selectedYear);
+    if (selectedRegiao) queryParamsObj.regiao = String(selectedRegiao);
+    if (selectedUF) queryParamsObj.uf_ies = String(selectedUF);
+    if (selectedEntidadeEnsino) queryParamsObj.entidade_ensino = String(selectedEntidadeEnsino);
+    if (selectedPrograma) queryParamsObj.programa = String(selectedPrograma);
+    if (selectedGrandeAreaConhecimento) queryParamsObj.grande_area_conhecimento = String(selectedGrandeAreaConhecimento);
+    if (selectedAreaConhecimento) queryParamsObj.area_conhecimento = String(selectedAreaConhecimento);
+    if (selectedAreaAvaliacao) queryParamsObj.area_avaliacao = String(selectedAreaAvaliacao);
 
-    const query = new URLSearchParams(queryParamsObj).toString();
+    console.log('queryParamsObj:', queryParamsObj);
 
-    router.push({
-      pathname: '/',
-      query: query,
-    });
+    const queryString = new URLSearchParams(queryParamsObj).toString(); 
+    return queryString ? `?${queryString}` : ''; 
+  }
 
-    setQueryParams(query)
+
+  const fetchProjects = async (query = '') => {
+    try {
+      const response = await fetch(`http://localhost:3001/projects${query}`);
+
+      if (!response.ok) {
+        throw new Error('Erro ao buscar produtos');
+      }
+
+      const data = await response.json();
+      setFilteredData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProjects(); 
+  }, []);
+
+  const handleFilter = async () => {
+    const query = buildQuery();
+    fetchProjects(query);
+  };
+
+  const handleClearFilters = () => {
+    setFilterTitulo('');
+    setFilterDiscente('');
+    setFilterOrientador('');
+    setPalavraChave('');
+    setLinhaPesquisa('');
+    setSelectedGrauAcademico('');
+    setSelectedYear('');
+    setSelectedRegiao('');
+    setSelectedUF('');
+    setSelectedEntidadeEnsino('');
+    setSelectedPrograma('');
+    setSelectedGrandeAreaConhecimento('');
+    setSelectedAreaConhecimento('');
+    setSelectedAreaAvaliacao('');
+
+    fetchProjects();
   };
 
   return (
-    <div className=''>
-      <div className='flex justify-center w-full bg-black'>
-        <Image src={iconeRoxo} alt="pretademia" className='flex justify-center h-52 w-52 m-8' />
+    <div>
+      <div className="flex justify-center w-full bg-black">
+        <Image src={iconeRoxo} alt="pretademia" className="h-52 w-52 m-8" />
       </div>
       <div className="container mx-auto p-4">
-      <form className='flex flex-col gap-4 text-purple-950 bg-yellow-400 border rounded-lg shadow-md border-gray-200'>
+        <form className="flex flex-col gap-4 text-purple-950 bg-yellow-400 border rounded-lg shadow-md border-gray-200">
         <div className='flex flex-row gap-4 justify-center mt-6'>
           <div>
             <Label htmlFor="titulo">Título do projeto:
@@ -157,7 +180,15 @@ const Filtro = () => {
           </div>
           <div>
             <Label htmlFor="orientador">Orientador:
-              <Input type="text" name="orientador" id="orientador" value={filterOrientador} onChange={(e) => setFilterOrientador(e.target.value)} />
+              <Input 
+              type="text" 
+              name="orientador" 
+              id="orientador" 
+              value={filterOrientador} 
+              onChange={(e) => {
+                  setFilterOrientador(e.target.value);
+                  }} 
+              />
             </Label>
           </div>
           <div>
@@ -174,56 +205,60 @@ const Filtro = () => {
 
         <div className='flex flex-row gap-4 justify-center'>
           <div>
-            <Label htmlFor="ano">Ano:
-              <Select
-                name="ano"
-                id="ano"
-                onChange={(e) => setSelectedYear(e.target.value)}
-              >
-                <SelectTrigger className="w-[192px]">
+            <Label htmlFor="ano">Ano:</Label>
+            <Select
+              name="ano"
+              id="ano"
+              value={selectedYear}
+              onValueChange={(value) => setSelectedYear(value)}
+            >
+              <SelectTrigger className="w-[192px]">
+                <SelectValue placeholder="Selecione" />
+              </SelectTrigger>
+              <SelectContent>
+                  <SelectItem value={null} key="none">Selecione</SelectItem>
+                {years.map((e) => (
+                  <SelectItem value={String(e)} name={String(e)} key={e}>
+                    {e}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label htmlFor="regiao">Região:</Label>
+            <Select
+              name="regiao"
+              id="regiao"
+              value={selectedRegiao}
+              onValueChange={(value) => setSelectedRegiao(value)}
+            >
+              <SelectTrigger className="w-[192px]">
                   <SelectValue placeholder="Selecione" />
                 </SelectTrigger>
-                <SelectContent>
-                  {years.map((e) => (
-                    <SelectItem value={e} name={e} key={e}>
-                      {e}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </Label>
+              <SelectContent>
+                  <SelectItem value={null} key="none">Selecione</SelectItem>
+                {regions.map((r) => (
+                  <SelectItem value={r} name={r} key={r}>
+                    {r}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           <div>
-            <Label htmlFor="regiao">Região:
-              <Select
-                name="regiao"
-                id="regiao"
-                onChange={(e) => setSelectedRegiao(e.target.value)}
-              >
-                <SelectTrigger className="w-[192px]">
-                    <SelectValue placeholder="Selecione" />
-                  </SelectTrigger>
-                <SelectContent>
-                  {regions.map((r) => (
-                    <SelectItem value={r} name={r} key={r}>
-                      {r}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </Label>
-          </div>
-          <div>
-            <Label htmlFor="uf">UF:
+            <Label htmlFor="uf">UF:</Label>
               <Select
                 name="uf"
                 id="uf"
-                onChange={(e) => setSelectedUF(e.target.value)}
+                value={selectedUF}
+                onValueChange={(value) => setSelectedUF(value)}
               >
                 <SelectTrigger className="w-[192px]">
                     <SelectValue placeholder="Selecione" />
                   </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value={null} key="none">Selecione</SelectItem>
                   {uf.map((e) => (
                     <SelectItem value={e} name={e} key={e}>
                       {e}
@@ -231,142 +266,154 @@ const Filtro = () => {
                   ))}
                 </SelectContent>
               </Select>
-            </Label>
           </div>
           <div>
-            <Label htmlFor="entidade_ensino">Entidade de Ensino:
-              <Select
-                name="entidade_ensino"
-                id="entidade_ensino"
-                onChange={(e) => setSelectedEntidadeEnsino(e.target.value)}
-              >
-                <SelectTrigger className="w-[192px]">
-                    <SelectValue placeholder="Selecione" />
-                  </SelectTrigger>
-                <SelectContent>
-                  {entidadeEnsinoData.map((e) => (
-                    <SelectItem value={e.entidade_ensino} name={e.entidade_ensino} key={e.entidade_ensino}>
-                      {e.entidade_ensino}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </Label>
-          </div>
-          <div>
-            <Label htmlFor="grau_academido">Grau acadêmico:
-              <Select
-                name="grau_academico"
-                id="grau_academico"
-                onChange={(e) => setSelectedGrauAcademico(e.target.value)}
-              >
-                <SelectTrigger className="w-[192px]">
+            <Label htmlFor="entidade_ensino">Entidade de Ensino: </Label>
+            <Select
+              name="entidade_ensino"
+              id="entidade_ensino"
+              value={selectedEntidadeEnsino}
+              onValueChange={(value) => setSelectedEntidadeEnsino(value)}
+            >
+              <SelectTrigger className="w-[192px]">
                   <SelectValue placeholder="Selecione" />
                 </SelectTrigger>
-                <SelectContent>
-                  {grauAcademico.map((e) => (
-                    <SelectItem value={e} name={e} key={e}>
-                      {e}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </Label>
+              <SelectContent>
+                  <SelectItem value={null} key="none">Selecione</SelectItem>
+                {entidadeEnsinoData.map((e) => (
+                  <SelectItem value={e.entidade_ensino} name={e.entidade_ensino} key={e.entidade_ensino}>
+                    {e.entidade_ensino}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label htmlFor="grau_academido">Grau acadêmico:</Label>
+            <Select
+              name="grau_academico"
+              id="grau_academico"
+              value={selectedGrauAcademico}
+              onValueChange={(value) => setSelectedGrauAcademico(value)}
+            >
+              <SelectTrigger className="w-[192px]">
+                <SelectValue placeholder="Selecione" />
+              </SelectTrigger>
+              <SelectContent>
+                  <SelectItem value={null} key="none">Selecione</SelectItem>
+                {grauAcademico.map((e) => (
+                  <SelectItem value={e} name={e} key={e}>
+                    {e}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
         </div>
         <div className='flex flex-row gap-4 justify-center'>
           <div>
-            <Label htmlFor="programa">Programa:
-              <Select
-                name="programa"
-                id="programa"
-                onChange={(e) => setSelectedPrograma(e.target.value)}
-              >
-                <SelectTrigger className="w-[192px]">
-                    <SelectValue placeholder="Selecione" />
-                  </SelectTrigger>
-                <SelectContent>
-                  {programaData.map((e) => (
-                    <SelectItem value={e.programa} name={e.programa} key={e.programa}>
-                      {e.programa}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </Label>
+            <Label htmlFor="programa">Programa:</Label>
+            <Select
+              name="programa"
+              id="programa"
+              value={selectedPrograma}
+              onValueChange={(value) => setSelectedPrograma(value)}
+            >
+              <SelectTrigger className="w-[192px]">
+                  <SelectValue placeholder="Selecione" />
+                </SelectTrigger>
+              <SelectContent>
+                  <SelectItem value={null} key="none">Selecione</SelectItem>
+                {programaData.map((e) => (
+                  <SelectItem value={e.programa} name={e.programa} key={e.programa}>
+                    {e.programa}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           <div>
-            <Label htmlFor="grande_area_conhecimento">Grande Área de Conhecimento:
-              <Select
-                name="grande_area_conhecimento"
-                id="grande_area_conhecimento"
-                onChange={(e) => setSelectedGrandeAreaConhecimento(e.target.value)}
-              >
-                <SelectTrigger className="w-[192px]">
-                    <SelectValue placeholder="Selecione" />
-                  </SelectTrigger>
-                <SelectContent>
-                  {grandeAreaConhecimentoData.map((e) => (
-                    <SelectItem value={e.grande_area_conhecimento} name={e.grande_area_conhecimento} key={e.grande_area_conhecimento}>
-                      {e.grande_area_conhecimento}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </Label>
+            <Label htmlFor="grande_area_conhecimento">Grande Área de Conhecimento:</Label>
+            <Select
+              name="grande_area_conhecimento"
+              id="grande_area_conhecimento"
+              value={selectedGrandeAreaConhecimento}
+              onValueChange={(value) => setSelectedGrandeAreaConhecimento(value)}
+            >
+              <SelectTrigger className="w-[192px]">
+                  <SelectValue placeholder="Selecione" />
+                </SelectTrigger>
+              <SelectContent>
+                {grandeAreaConhecimentoData.map((e) => (
+                  <SelectItem value={e.grande_area_conhecimento} name={e.grande_area_conhecimento} key={e.grande_area_conhecimento}>
+                    {e.grande_area_conhecimento}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           <div>
-            <Label htmlFor="area_conhecimento">Área de Conhecimento:
-              <Select
-                name="area_conhecimento"
-                id="area_conhecimento"
-                onChange={(e) => setSelectedAreaConhecimento(e.target.value)}
-              >
-                <SelectTrigger className="w-[192px]">
-                    <SelectValue placeholder="Selecione" />
-                  </SelectTrigger>
-                <SelectContent>
-                  {areaConhecimentoData.map((e) => (
-                    <SelectItem value={e.area_conhecimento} name={e.area_conhecimento} key={e.area_conhecimento}>
-                      {e.area_conhecimento}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </Label>
+            <Label htmlFor="area_conhecimento">Área de Conhecimento:</Label>
+            <Select
+              name="area_conhecimento"
+              id="area_conhecimento"
+              value={selectedAreaConhecimento}
+              onValueChange={(value) => setSelectedAreaConhecimento(value)}
+            >
+              <SelectTrigger className="w-[192px]">
+                  <SelectValue placeholder="Selecione" />
+                </SelectTrigger>
+              <SelectContent>
+                {areaConhecimentoData.map((e) => (
+                  <SelectItem value={e.area_conhecimento} name={e.area_conhecimento} key={e.area_conhecimento}>
+                    {e.area_conhecimento}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           <div>
-            <Label htmlFor="area_avaliacao">Área de Avaliação:
-              <Select
-                name="area_avaliacao"
-                id="area_avaliacao"
-                onChange={(e) => setSelectedAreaAvaliacao(e.target.value)}
-              >
-                <SelectTrigger className="w-[192px]">
-                    <SelectValue placeholder="Selecione" />
-                  </SelectTrigger>
-                <SelectContent>
-                  {areaAvaliacaoData.map((e) => (
-                    <SelectItem value={e.area_avaliacao} name={e.area_avaliacao} key={e.area_avaliacao}>
-                      {e.area_avaliacao}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </Label>
+            <Label htmlFor="area_avaliacao">Área de Avaliação:</Label>
+            <Select
+              name="area_avaliacao"
+              id="area_avaliacao"
+              value={selectedAreaAvaliacao}
+              onValueChange={(value) => setSelectedAreaAvaliacao(value)}
+            >
+              <SelectTrigger className="w-[192px]">
+                  <SelectValue placeholder="Selecione" />
+                </SelectTrigger>
+              <SelectContent>
+                {areaAvaliacaoData.map((e) => (
+                  <SelectItem value={e.area_avaliacao} name={e.area_avaliacao} key={e.area_avaliacao}>
+                    {e.area_avaliacao}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </div>
 
-          <div className='flex flex-row gap-4 justify-between mb-6 mx-28 mt-2'>
-          <Button type="button" size='lg' className='text-yellow-400 bg-purple-950'>
-            Limpar filtros
-          </Button>
-          <Button type="button" size='lg' className='text-yellow-400 bg-purple-950' onClick={handleFilter}>
-            Filtrar
-          </Button>
-        </div>
-      </form>
+          <div className="flex flex-row gap-4 justify-between mb-6 mx-28 mt-2">
+            <Button
+              type="button"
+              size="lg"
+              className="text-yellow-400 bg-purple-950"
+              onClick={handleClearFilters}
+            >
+              Limpar filtros
+            </Button>
+            <Button
+              type="button"
+              size="lg"
+              className="text-yellow-400 bg-purple-950"
+              onClick={handleFilter}
+            >
+              Filtrar
+            </Button>
+          </div>
+        </form>
       </div>
     </div>
   );

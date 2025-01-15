@@ -4,12 +4,16 @@ import PretademiaContext from '../../context/pretademiaContext';
 const Table = () => {
   const { filteredData } = useContext(PretademiaContext);
 
-  console.log(filteredData);
-
   return (
     <div className="container mx-auto p-4">
       <div className="flex flex-col gap-4">
-        {filteredData.map((item, index) => (
+        {filteredData.length === 0 ? (
+          <div className='flex justify-center'>
+            <p>Nenhum projeto encontrado para os filtros aplicados</p>
+          </div>
+        ) : (
+          
+        filteredData.map((item, index) => (
           <div
             key={index}
             className="bg-yellow-400 shadow-md rounded-lg p-6 border border-gray-200 w-full"
@@ -69,7 +73,8 @@ const Table = () => {
               </div>
             </div>
           </div>
-        ))}
+        ))
+        )}
       </div>
     </div>
   );
