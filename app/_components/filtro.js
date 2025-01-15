@@ -5,10 +5,10 @@ import Image from 'next/image'
 import PretademiaContext from '../../context/pretademiaContext';
 import { years, regions, uf, grauAcademico } from '../../services/dataFilters';
 import iconeRoxo from '../../public/iconeRoxo.png';
-import { Input } from '@/components/ui/Input';
-import { Label } from '@/components/ui/Label';
-import { Select, SelectItem, SelectTrigger, SelectValue, SelectContent } from '@/components/ui/Select';
-import { Button } from '@/components/ui/Button';
+import { Input } from '../../components/ui/Input';
+import { Label } from '../../components/ui/Label';
+import { Select, SelectItem, SelectTrigger, SelectValue, SelectContent } from '../../components/ui/Select';
+import { Button } from '../../components/ui/Button';
 
 const Filtro = () => {
 
