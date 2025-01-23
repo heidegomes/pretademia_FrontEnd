@@ -1,5 +1,5 @@
 'use client';
-
+import React from 'react';
 import { useContext, useEffect, useState } from 'react';
 import Image from 'next/image'
 import PretademiaContext from '../../context/pretademiaContext';
@@ -32,7 +32,7 @@ const Filtro = () => {
   const [areaAvaliacaoData, setAreaAvaliacaoData] = useState([]);
   const [selectedAreaAvaliacao, setSelectedAreaAvaliacao] = useState('');
 
-  const { filteredData, setFilteredData } = useContext(PretademiaContext);
+  const { setFilteredData } = useContext(PretademiaContext);
 
   useEffect(() => {
     const fetchEntidadeEnsino = async () => {
@@ -194,9 +194,7 @@ const Filtro = () => {
             <Label htmlFor="linha_pesquisa">Linha de pesquisa:
                 <Input type="text" className="placeholder:text-purple-950/50" name="linha_pesquisa" placeholder="Digite" id="linha_pesquisa" value={linhaPesquisa} onChange={(e) => setLinhaPesquisa(e.target.value)} />
             </Label>
-          </div>
-      
-
+            </div>
 
             <div className='mx-4'>
             <Label htmlFor="ano">Ano:</Label>
