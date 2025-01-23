@@ -36,7 +36,7 @@ export default function Contact() {
       <div className="text-yellow-400 bg-black">
         <div className="container mx-auto pt-40 ">
           <section className="py-12 px-6 lg:px-32">
-            <div className="max-w-4xl mx-auto shadow-lg border text-purple-950 bg-yellow-400  rounded-lg p-8">
+            <div className="max-w-4xl mx-auto border text-purple-950 bg-yellow-400  rounded-lg p-8">
               <h1 className="text-3xl font-bold mb-6 text-center">
                 Entre em Contato
               </h1>

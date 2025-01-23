@@ -9,7 +9,7 @@ export default function About() {
       <Header />
       <div className="text-yellow-400 bg-black">
         <div className="container mx-auto pt-40 ">
-          <div className='border rounded-lg shadow-md text-purple-950 bg-yellow-400 m-4'>
+          <div className='max-w-4xl mx-auto border rounded-lg text-purple-950 bg-yellow-400 m-4'>
           <h1 className="text-4xl font-bold mt-4 text-center">
             Sobre Nós
             </h1>
