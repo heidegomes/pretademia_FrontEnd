@@ -165,7 +165,7 @@ const Filtro = () => {
       <div className="flex justify-center w-full bg-black">
         <Image src={iconeRoxo} alt="pretademia" className="h-52 w-52 m-8" />
       </div>
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto pt-0 p-4">
         <form className="text-purple-950 bg-yellow-400 border rounded-lg shadow-md border-gray-200">
           <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4'>
 
