@@ -166,45 +166,39 @@ const Filtro = () => {
         <Image src={iconeRoxo} alt="pretademia" className="h-52 w-52 m-8" />
       </div>
       <div className="container mx-auto p-4">
-        <form className="flex flex-col gap-4 text-purple-950 bg-yellow-400 border rounded-lg shadow-md border-gray-200">
-        <div className='flex flex-row gap-4 justify-center mt-6'>
-          <div>
-            <Label htmlFor="titulo">Título do projeto:
-              <Input type="text" name="titulo" id="titulo" value={filterTitulo} onChange={(e) => setFilterTitulo(e.target.value)} />
-            </Label>
-          </div>
-          <div>
-            <Label htmlFor="discente">Discente:
-              <Input type="text" name="discente" id="discente" value={filterDiscente} onChange={(e) => setFilterDiscente(e.target.value)} />
-            </Label>
-          </div>
-          <div>
-            <Label htmlFor="orientador">Orientador:
-              <Input 
-              type="text" 
-              name="orientador" 
-              id="orientador" 
-              value={filterOrientador} 
-              onChange={(e) => {
-                  setFilterOrientador(e.target.value);
-                  }} 
-              />
-            </Label>
-          </div>
-          <div>
-            <Label htmlFor="palavra_chave">Palavra-chave:
-              <Input type="text" name="palavra_chave" id="palavra_chave" value={palavraChave} onChange={(e) => setPalavraChave(e.target.value)} />
-            </Label>
-          </div>
-          <div>
-            <Label htmlFor="linha_pesquisa">Linha de pesquisa:
-              <Input type="text" name="linha_pesquisa" id="linha_pesquisa" value={linhaPesquisa} onChange={(e) => setLinhaPesquisa(e.target.value)} />
-            </Label>
-          </div>
-        </div>
+        <form className="text-purple-950 bg-yellow-400 border rounded-lg shadow-md border-gray-200">
+          <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4'>
 
-        <div className='flex flex-row gap-4 justify-center'>
-          <div>
+        
+          <div className='mx-4'>
+            <Label htmlFor="titulo">Título do projeto:
+                <Input type="text" className="placeholder:text-purple-950/50" name="titulo" placeholder="Digite" id="titulo" value={filterTitulo} onChange={(e) => setFilterTitulo(e.target.value)} />
+            </Label>
+          </div>
+            <div className='mx-4'>
+            <Label htmlFor="discente">Discente:
+                <Input type="text" className="placeholder:text-purple-950/50" name="discente" placeholder="Digite" id="discente" value={filterDiscente} onChange={(e) => setFilterDiscente(e.target.value)} />
+            </Label>
+          </div>
+            <div className='mx-4'>
+            <Label htmlFor="orientador">Orientador:
+                <Input type="text" className="placeholder:text-purple-950/50" name="orientador" placeholder="Digite" id="orientador" value={filterOrientador} onChange={(e) => setFilterOrientador(e.target.value)} />
+            </Label>
+          </div>
+            <div className='mx-4'>
+            <Label htmlFor="palavra_chave">Palavra-chave:
+                <Input type="text" className="placeholder:text-purple-950/50" name="palavra_chave" placeholder="Digite" id="palavra_chave" value={palavraChave} onChange={(e) => setPalavraChave(e.target.value)} />
+            </Label>
+          </div>
+            <div className='mx-4'>
+            <Label htmlFor="linha_pesquisa">Linha de pesquisa:
+                <Input type="text" className="placeholder:text-purple-950/50" name="linha_pesquisa" placeholder="Digite" id="linha_pesquisa" value={linhaPesquisa} onChange={(e) => setLinhaPesquisa(e.target.value)} />
+            </Label>
+          </div>
+      
+
+
+            <div className='mx-4'>
             <Label htmlFor="ano">Ano:</Label>
             <Select
               name="ano"
@@ -212,7 +206,7 @@ const Filtro = () => {
               value={selectedYear}
               onValueChange={(value) => setSelectedYear(value)}
             >
-              <SelectTrigger className="w-[192px]">
+              <SelectTrigger>
                 <SelectValue placeholder="Selecione" />
               </SelectTrigger>
               <SelectContent>
@@ -225,7 +219,7 @@ const Filtro = () => {
               </SelectContent>
             </Select>
           </div>
-          <div>
+            <div className='mx-4'>
             <Label htmlFor="regiao">Região:</Label>
             <Select
               name="regiao"
@@ -233,7 +227,7 @@ const Filtro = () => {
               value={selectedRegiao}
               onValueChange={(value) => setSelectedRegiao(value)}
             >
-              <SelectTrigger className="w-[192px]">
+              <SelectTrigger>
                   <SelectValue placeholder="Selecione" />
                 </SelectTrigger>
               <SelectContent>
@@ -246,7 +240,7 @@ const Filtro = () => {
               </SelectContent>
             </Select>
           </div>
-          <div>
+            <div className='mx-4'>
             <Label htmlFor="uf">UF:</Label>
               <Select
                 name="uf"
@@ -254,7 +248,7 @@ const Filtro = () => {
                 value={selectedUF}
                 onValueChange={(value) => setSelectedUF(value)}
               >
-                <SelectTrigger className="w-[192px]">
+                <SelectTrigger>
                     <SelectValue placeholder="Selecione" />
                   </SelectTrigger>
                 <SelectContent>
@@ -267,7 +261,7 @@ const Filtro = () => {
                 </SelectContent>
               </Select>
           </div>
-          <div>
+            <div className='mx-4'>
             <Label htmlFor="entidade_ensino">Entidade de Ensino: </Label>
             <Select
               name="entidade_ensino"
@@ -275,7 +269,7 @@ const Filtro = () => {
               value={selectedEntidadeEnsino}
               onValueChange={(value) => setSelectedEntidadeEnsino(value)}
             >
-              <SelectTrigger className="w-[192px]">
+              <SelectTrigger>
                   <SelectValue placeholder="Selecione" />
                 </SelectTrigger>
               <SelectContent>
@@ -288,7 +282,7 @@ const Filtro = () => {
               </SelectContent>
             </Select>
           </div>
-          <div>
+            <div className='mx-4'>
             <Label htmlFor="grau_academido">Grau acadêmico:</Label>
             <Select
               name="grau_academico"
@@ -296,7 +290,7 @@ const Filtro = () => {
               value={selectedGrauAcademico}
               onValueChange={(value) => setSelectedGrauAcademico(value)}
             >
-              <SelectTrigger className="w-[192px]">
+              <SelectTrigger>
                 <SelectValue placeholder="Selecione" />
               </SelectTrigger>
               <SelectContent>
@@ -310,9 +304,8 @@ const Filtro = () => {
             </Select>
           </div>
 
-        </div>
-        <div className='flex flex-row gap-4 justify-center'>
-          <div>
+
+            <div className='mx-4'>
             <Label htmlFor="programa">Programa:</Label>
             <Select
               name="programa"
@@ -320,7 +313,7 @@ const Filtro = () => {
               value={selectedPrograma}
               onValueChange={(value) => setSelectedPrograma(value)}
             >
-              <SelectTrigger className="w-[192px]">
+              <SelectTrigger>
                   <SelectValue placeholder="Selecione" />
                 </SelectTrigger>
               <SelectContent>
@@ -333,7 +326,7 @@ const Filtro = () => {
               </SelectContent>
             </Select>
           </div>
-          <div>
+            <div className='mx-4'>
             <Label htmlFor="grande_area_conhecimento">Grande Área de Conhecimento:</Label>
             <Select
               name="grande_area_conhecimento"
@@ -341,7 +334,7 @@ const Filtro = () => {
               value={selectedGrandeAreaConhecimento}
               onValueChange={(value) => setSelectedGrandeAreaConhecimento(value)}
             >
-              <SelectTrigger className="w-[192px]">
+              <SelectTrigger>
                   <SelectValue placeholder="Selecione" />
                 </SelectTrigger>
               <SelectContent>
@@ -353,7 +346,7 @@ const Filtro = () => {
               </SelectContent>
             </Select>
           </div>
-          <div>
+            <div className='mx-4'>
             <Label htmlFor="area_conhecimento">Área de Conhecimento:</Label>
             <Select
               name="area_conhecimento"
@@ -361,7 +354,7 @@ const Filtro = () => {
               value={selectedAreaConhecimento}
               onValueChange={(value) => setSelectedAreaConhecimento(value)}
             >
-              <SelectTrigger className="w-[192px]">
+              <SelectTrigger>
                   <SelectValue placeholder="Selecione" />
                 </SelectTrigger>
               <SelectContent>
@@ -373,7 +366,7 @@ const Filtro = () => {
               </SelectContent>
             </Select>
           </div>
-          <div>
+            <div className='mx-4'>
             <Label htmlFor="area_avaliacao">Área de Avaliação:</Label>
             <Select
               name="area_avaliacao"
@@ -381,7 +374,7 @@ const Filtro = () => {
               value={selectedAreaAvaliacao}
               onValueChange={(value) => setSelectedAreaAvaliacao(value)}
             >
-              <SelectTrigger className="w-[192px]">
+              <SelectTrigger>
                   <SelectValue placeholder="Selecione" />
                 </SelectTrigger>
               <SelectContent>
@@ -393,9 +386,9 @@ const Filtro = () => {
               </SelectContent>
             </Select>
           </div>
-        </div>
+          </div>
 
-          <div className="flex flex-row gap-4 justify-between mb-6 mx-28 mt-2">
+          <div className="flex flex-row gap-4 justify-center md:justify-between mb-6 mx-28 mt-2">
             <Button
               type="button"
               size="lg"
