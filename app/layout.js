@@ -1,7 +1,6 @@
-'use client';
-
 import React from 'react';
-import PretademiaProvider from '../context/pretademiaProvider';
+import PropTypes from 'prop-types';
+import { PretademiaProvider } from '../context/pretademiaProvider';
 import './globals.css';
 
 export default function RootLayout({ children }) {
@@ -15,10 +14,13 @@ export default function RootLayout({ children }) {
       </head>
       <body className="bg-black text-yellow-400">
         <PretademiaProvider>
-          {children}
+          {children} 
         </PretademiaProvider>
       </body>
     </html>
   );
 }
 
+RootLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+};

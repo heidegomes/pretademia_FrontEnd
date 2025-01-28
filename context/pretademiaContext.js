@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-const PretademiaContext = createContext();
+const PretademiaContext = createContext();  // Criação do contexto
 
-export default PretademiaContext;
+export default PretademiaContext;  // Exporta o contexto
